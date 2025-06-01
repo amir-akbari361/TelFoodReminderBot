@@ -381,8 +381,11 @@ def format_meals(meals):
 async def handle_food_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
 
+    if not is_valid_food_request(update.message.text):
+        await update.message.reply_text("❌ درخواست معتبر نیست.", reply_markup=MAIN_MARKUP)
+        return
+
     try:
-        # بررسی محدودیت نرخ درخواست
         is_allowed, reason = check_rate_limit(chat_id)
 
         if not is_allowed:
@@ -566,6 +569,21 @@ def add_user_to_processing(chat_id):
 def remove_user_from_processing(chat_id):
     USER_PROCESSING.discard(chat_id)
     logging.info(f"User {chat_id} removed from processing. Current processing users: {len(USER_PROCESSING)}")
+
+
+# ─── Filter Commands    ────────────────────────────────────────
+
+VALID_PATTERNS = [
+    r'^غذای\s*امروز\؟?$',
+    r'^منوی\s*امروز\؟?$',
+    r'^غذای\s*(این\s*هفته|هفته)\؟?$',
+    r'^منوی\s*هفته\؟?$'
+]
+
+def is_valid_food_request(text: str) -> bool:
+    """بررسی می‌کند که پیام کاربر جزء درخواست‌های معتبر است یا نه."""
+    text = (text or "").strip().lower()
+    return any(re.match(p, text) for p in VALID_PATTERNS)
 
 # ─── Food Commands    ────────────────────────────────────────
 async def today_food(update: Update, context: ContextTypes.DEFAULT_TYPE):
