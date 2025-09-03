@@ -1,0 +1,52 @@
+# .github/workflows/update_menu.yml
+
+name: Update University Food Menu
+
+on:
+  # این خط بهت اجازه می‌ده که به صورت دستی هم اکشن رو اجرا کنی
+  workflow_dispatch:
+  
+  # این اکشن رو به صورت زمان‌بندی شده اجرا می‌کنه
+  schedule:
+    # این دستور یعنی "هر شنبه ساعت ۴ صبح به وقت جهانی (UTC)"
+    # می‌تونی زمانش رو به دلخواه تغییر بدی
+    - cron: '0 4 * * 6'
+
+jobs:
+  scrape_and_commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      # مرحله ۱: کد پروژه رو از ریپازیتوری دانلود می‌کنه
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # مرحله ۲: پایتون رو نصب می‌کنه
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # مرحله ۳: کتابخانه‌های لازم رو نصب می‌کنه
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      # مرحله ۴: اسکریپت اسکرپر رو اجرا می‌کنه
+      - name: Run scraper to update menu files
+        env:
+          UNIVERSITY_USERNAME: ${{ secrets.UNIVERSITY_USERNAME }}
+          UNIVERSITY_PASSWORD: ${{ secrets.UNIVERSITY_PASSWORD }}
+        run: python scraper.py
+
+      # مرحله ۵: تغییرات فایل‌های HTML رو کامیت و پوش می‌کنه
+      - name: Commit and push if there are changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          # اضافه کردن تمام فایل‌های HTML به کامیت
+          git add *.html
+          # فقط در صورتی که تغییری وجود داشته باشه، کامیت می‌کنه
+          git diff --staged --quiet || git commit -m "chore: Update weekly food menus"
+          git push
