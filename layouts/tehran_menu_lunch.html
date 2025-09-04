@@ -1,0 +1,1528 @@
+
+
+
+<style>
+    @media (min-width: 1024px) {
+        #MealDiv {
+            Width: 18%;
+        }
+    }
+
+    .selectedOption {
+        background-color: #f8aea6;
+        color: white;
+    }
+
+    .foodOptionName {
+        font-size: 12px !important;
+        margin-top: 2px !important;
+    }
+
+    .foodOptionContainer {
+        gap:2px;
+        border-right: 2px solid #DAD9D9;
+        border-radius: 2px;
+        width: 88%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        align-items:center;
+    }
+
+    .foodOptionCheckBox {
+        width: 16.5px !important;
+        height: 11px !important;
+        margin: 0 !important;
+        border-radius: 6px !important;
+    }
+
+
+    .dayContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #FCF8EF;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .dayContainer .day {
+            font-weight: bold;
+            font-size: 18px;
+            color: black;
+        }
+
+        .dayContainer .date {
+            font-size: 16px;
+            color: black;
+        }
+
+    .dietSelectContainer {
+        width: 100px;
+    }
+
+    .dietTypeSelect {
+        width: 100%;
+        font-size: 12px;
+        padding: 2px 4px;
+        box-sizing: border-box; /* Ensures padding doesn't add extra width */
+    }
+
+   /* option {
+        font-family: "IRANSans(FaNum) Medium"
+    }*/
+</style>
+
+
+
+<style>
+    .likeLinkEn, .likeLinkDis {
+        float: right;
+        position: relative;
+        margin: 3px
+    }
+
+    .en {
+        height: 25px
+    }
+
+    .dis {
+        height: 20px
+    }
+
+    .nav-tabs > li {
+        float: right;
+    }
+
+    .summeryTd {
+        width: 20px !important;
+        min-width: 20px !important;
+        height: 20px !important;
+        border: 1px solid white;
+        border-spacing: 10px;
+        text-align: center;
+        border-collapse: separate;
+    }
+
+    .summeryHd {
+        width: 20px !important;
+        min-width: 20px !important;
+        height: 20px !important;
+        border-spacing: 10px;
+        text-align: center;
+        border-collapse: separate;
+    }
+
+    .background-red {
+        background: red !important;
+    }
+
+    .background-orange {
+        background: orange !important;
+    }
+
+    .background-green {
+        background: green !important;
+    }
+
+    .background-blue {
+        background: blue !important;
+    }
+
+    .summeryTable {
+        border-spacing: 5px;
+        /*width: 100% !important;*/
+        border: none;
+        min-height: 0px !important;
+    }
+
+    .custom-navigation {
+        min-width: 450px;
+    }
+
+    .mytooltip {
+        position: relative;
+    }
+
+        /* Tooltip text */
+        .mytooltip .mytooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            padding: 1px;
+            border-radius: 6px;
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            visibility: visible;
+        }
+</style>
+
+<div class="tabs">
+    <div style="float:right;display:none;">
+        <div style="display:none;">
+            <div class="moreInfo" style="width: 695px; height: 420px;display:block;overflow-y:scroll">
+                <p style="text-align:center;background-color:#14c194;color:white;margin: 0;padding-bottom: 3px">جزئیات گروه</p>
+                <div style="padding:15px;height:415px;overflow-y:auto;">
+                    <p>نام گروه: <span style="color:brown;">دانشكدگان مديريت</span></p>
+                    <p>حداکثر ژتون فراموشی(هفتگی): <span style="color:brown;">0</span> عدد</p>
+                    <p>جریمه ژتون فراموشی: <span style="color:brown;">0</span> ریال</p>
+                    
+                    <p>نوع روزفروش: <span style="color:brown;">فقط برای افرادی که رزرو ندارند و روز فروش هنوز نگرفته اند</span></p>
+                    <p>حداقل موجودی: <span style="color:brown;">-30000.00</span> ریال</p>
+                    <p>آیا روز تعطیل مجاز به رزرو می باشد؟: <span style="color:brown;">نگرفتن غذا در روزهای تعطیل</span></p>
+                        <p>آخرین ساعت رزرو: <span style="color:brown;">11:59:00</span></p>
+                        <p>رزرو از چند روز بعد: <span style="color:brown;">3</span> روز</p>
+                        <p>روز های مجاز رزرو: <span style="color:brown;">یکشنبه - دوشنبه - سه شنبه - چهارشنبه - پنجشنبه - جمعه - شنبه -</span></p>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <a href="#openModal"><img src="/Content/resources/images/info.png" style="width:30px" /></a>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12  floatRight padding0">
+        <div style="height:120px;background-color:#dad9d9;display:contents;">
+                <table class="summeryTable reserveFoodMeal" style="display: table;">
+                    <tr>
+                        <td></td>
+                                    <td class="summeryHd">ش</td>
+                                    <td class="summeryHd">1</td>
+                                    <td class="summeryHd">2</td>
+                                    <td class="summeryHd">3</td>
+                                    <td class="summeryHd">4</td>
+                    </tr>
+
+                        <tr>
+                            <td class="TimeMeal">ناهار</td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd background-blue mytooltip">
+                                        <span class="mytooltiptext">فرستاده نشده</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                        </tr>
+                        <tr>
+                            <td class="TimeMeal">شام</td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                        </tr>
+                        <tr>
+                            <td class="TimeMeal">صبحانه</td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                                    <td class="summeryTd mytooltip">
+                                        <span class="mytooltiptext">خالی</span>
+                                    </td>
+                        </tr>
+
+                </table>        </div>
+
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 floatRight padding0">
+        <div style="height:60px;text-align:right;" class="backEtebar">
+            <div>
+                <span style="color:#3F3F3F;font-family: 'IRANSans(FaNum) Medium'; direction:rtl" class="name">اعتبار : </span>
+                    <span id="reserveCredit" style="color:darkgreen ;font-family: 'IRANSans(FaNum) Medium'; direction:rtl" class="name">2,195,000</span>
+
+                <span style="color:#3F3F3F;font-family: 'IRANSans(FaNum) Medium'; direction:rtl" class="name"> ریال</span>
+            </div>
+
+
+        </div>
+        <div style="height:auto; display:flex; padding:0;" class="backEtebar">
+            <ul style="height: auto;" class="nav nav-tabs nav-tabs-right padding-right0 custom-navigate" id="myTab6">
+                <li>
+                    <a id="PreWeek" , class="textbox" , style="display:block;margin-bottom:3px;color:white">هفته قبل</a>
+                </li>
+                <li class="">
+                    <a id="CurrentWeek" , class="textbox" , style="display:block;margin-bottom:3px;color:white">این هفته</a>
+                </li>
+                <li class="">
+                    <a id="NextWeek" , class="textbox" , style="display:block;margin-bottom:3px;color:white">هفته بعد</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="float:left"></div>
+
+    <div class="tab-content " id="myTabContent6">
+        <div>
+                <div class="clearSty"></div>
+                <div class="backrest">
+                    <div class="mealTXT hidden-sm hidden-xs" style="Width:8%; display:flex; flex-direction: column; justify-content: center;">
+                        <span>وعده ها</span>
+                    </div>
+                    <div class="restTXT" style="Width:98%; float:right; text-align: center;">
+                        <span>رستوران :  دانشکده-سلف مدیریت</span>
+                        <br />
+                        <span>برنامه غذایی اصلی</span>
+                    </div>
+                </div>
+                <div class="form-horizontal" id="TopDateDiv">
+
+                    
+
+                    <div class="backWeek1" style='color:white;direction:rtl;float:right;Width:8%'>
+                        روز
+                        <br />
+                        هفته
+                    </div>
+
+                        <div class="backWeek1" style='color:#810205;direction:rtl;float:right;Width:18%'>
+                            شنبه
+                            <br />
+                            1404/03/17
+                        </div>
+                        <div class="backWeek1" style='color:White;direction:rtl;float:right;Width:18%'>
+                            یکشنبه
+                            <br />
+                            1404/03/18
+                        </div>
+                        <div class="backWeek1" style='color:#810205;direction:rtl;float:right;Width:18%'>
+                            دوشنبه
+                            <br />
+                            1404/03/19
+                        </div>
+                        <div class="backWeek1" style='color:#810205;direction:rtl;float:right;Width:18%'>
+                            سه شنبه
+                            <br />
+                            1404/03/20
+                        </div>
+                        <div class="backWeek1" style='color:#810205;direction:rtl;float:right;Width:18%'>
+                            چهارشنبه
+                            <br />
+                            1404/03/21
+                        </div>
+
+                </div>
+        <div class="PhoneView" style="display:none">
+            <div class="dayContainer">
+                <span class="day">شنبه</span>
+                <span class="date">1404/03/17</span>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; clear: both;">
+                <div class="reserveFoodMeal" style="float:right;display:flex; flex-direction: column; justify-content: center;">
+                    <span class="TimeMeal">ناهار</span>
+                    <br />
+                    <label class="priceTXT" for="">یارانه:قیمت  برحسب غذا(آزاد)</label>                                        <div>
+                        <div style="display:none;">
+                            <div class="moreInfo" style="width: 695px; height: 350px;">
+                                <p style="text-align:center;background-color:#14c194;color:white;margin: 0;padding-bottom: 3px">جزئیات وعده</p>
+                                <div style="padding:15px;">
+                                    <p>وعده: <span style="color:brown;">ناهار</span></p>
+                                    <p>برنامه غذایی: <span style="color:brown;">برنامه غذایی اصلی</span></p>
+
+
+                                    <p>نحوه محسابه قیمت: <span style="color:brown;">برحسب قیمت غذا(آزاد)</span></p>
+                                    <p>حداکثرتعداد بسته غذایی: <span style="color:brown;">1</span> عدد</p>
+                                    <p>حداکثرتعداد غذا در هر نوع: <span style="color:brown;">1</span> عدد</p>
+                                    <p>
+                                        آیا انتخاب چند غذا از یک نوع مجاز است؟: <span style="color:brown;">
+ خیر                                        </span>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                            <a href="#openModal" style="display:normal;color:#14c194;text-decoration:none;">
+                                <img src="/Content/resources/images/info1.png" style="width:34px" alt="Info" />
+                            </a>
+                    </div>
+
+                </div>
+
+
+                <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div style="clear:both;"></div>
+                        <label class="reserveFoodType">غذای اصلی</label>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_07ppp00-00dt2025_06_07ppp00-00me1dm1fo481ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---90f25bc3-2504-4284-ae3f-9a2780e706d8" data-countchange="false" data-precount="0" data-count="0"
+                               data-prechecked="False" data-diet-food="dietfood---90f25bc3-2504-4284-ae3f-9a2780e706d8" data-food-options=""
+                                  disabled='disabled'   />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_07ppp00-00dt2025_06_07ppp00-00me1dm1fo481ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;سبزی پلو با تن ماهی+زیتون (40 گرم)+خرما &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;سبزی پلو با تن ماهی+زیتون (40 گرم)+خرما &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;سبزی پلو با تن ماهی+زیتون (40 گرم)+خرما &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                سبزی پلو با تن ماهی+زیتون (40 گرم)+خرما
+                                <span class="reserveFoodType">
+
+
+                                    150,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_07ppp00-00dt2025_06_07ppp00-00me1dm1fo941ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---51a86b03-1e24-4c44-bb8c-4805cbfa8310" data-countchange="false" data-precount="0" data-count="0"
+                               data-prechecked="False" data-diet-food="dietfood---51a86b03-1e24-4c44-bb8c-4805cbfa8310" data-food-options=""
+                                  disabled='disabled'   />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_07ppp00-00dt2025_06_07ppp00-00me1dm1fo941ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک قارچ و گوشت+زیتون (40 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک قارچ و گوشت+زیتون (40 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                خوراک قارچ و گوشت+زیتون (40 گرم)
+                                <span class="reserveFoodType">
+
+
+                                    150,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+ 
+
+                    
+                    
+                </div>
+
+            </div>
+            <div class="dayContainer">
+                <span class="day">یکشنبه</span>
+                <span class="date">1404/03/18</span>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; clear: both;">
+                <div class="reserveFoodMeal" style="float:right;display:flex; flex-direction: column; justify-content: center;">
+                    <span class="TimeMeal">ناهار</span>
+                    <br />
+                    <label class="priceTXT" for="">یارانه:قیمت  برحسب غذا(آزاد)</label>                                        <div>
+                        <div style="display:none;">
+                            <div class="moreInfo" style="width: 695px; height: 350px;">
+                                <p style="text-align:center;background-color:#14c194;color:white;margin: 0;padding-bottom: 3px">جزئیات وعده</p>
+                                <div style="padding:15px;">
+                                    <p>وعده: <span style="color:brown;">ناهار</span></p>
+                                    <p>برنامه غذایی: <span style="color:brown;">برنامه غذایی اصلی</span></p>
+
+
+                                    <p>نحوه محسابه قیمت: <span style="color:brown;">برحسب قیمت غذا(آزاد)</span></p>
+                                    <p>حداکثرتعداد بسته غذایی: <span style="color:brown;">1</span> عدد</p>
+                                    <p>حداکثرتعداد غذا در هر نوع: <span style="color:brown;">1</span> عدد</p>
+                                    <p>
+                                        آیا انتخاب چند غذا از یک نوع مجاز است؟: <span style="color:brown;">
+ خیر                                        </span>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                            <a href="#openModal" style="display:normal;color:#14c194;text-decoration:none;">
+                                <img src="/Content/resources/images/info1.png" style="width:34px" alt="Info" />
+                            </a>
+                    </div>
+
+                </div>
+
+
+                <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div style="clear:both;"></div>
+                        <label class="reserveFoodType">غذای اصلی</label>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_08ppp00-00dt2025_06_08ppp00-00me1dm1fo508ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---e82fc583-b449-4d75-b05e-bfbb8bd7f366" data-countchange="false" data-precount="0" data-count="0"
+                               data-prechecked="False" data-diet-food="dietfood---e82fc583-b449-4d75-b05e-bfbb8bd7f366" data-food-options=""
+                                  disabled='disabled'   />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_08ppp00-00dt2025_06_08ppp00-00me1dm1fo508ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;زرشك پلوبامرغ+سوپ &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;زرشك پلوبامرغ+سوپ &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                زرشك پلوبامرغ+سوپ
+                                <span class="reserveFoodType">
+
+
+                                    150,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_08ppp00-00dt2025_06_08ppp00-00me1dm1fo509ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---7ed889fe-13bd-4387-91d7-9b263bd72681" data-countchange="false" data-precount="0" data-count="0"
+                               data-prechecked="False" data-diet-food="dietfood---7ed889fe-13bd-4387-91d7-9b263bd72681" data-food-options=""
+                                  disabled='disabled'   />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_08ppp00-00dt2025_06_08ppp00-00me1dm1fo509ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک سالاد ماكاروني+سوپ &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک سالاد ماكاروني+سوپ &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                خوراک سالاد ماكاروني+سوپ
+                                <span class="reserveFoodType">
+
+
+                                    120,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+ 
+
+                    
+                    
+                </div>
+
+            </div>
+            <div class="dayContainer">
+                <span class="day">دوشنبه</span>
+                <span class="date">1404/03/19</span>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; clear: both;">
+                <div class="reserveFoodMeal" style="float:right;display:flex; flex-direction: column; justify-content: center;">
+                    <span class="TimeMeal">ناهار</span>
+                    <br />
+                    <label class="priceTXT" for="">یارانه:قیمت  برحسب غذا(آزاد)</label>                                        <div>
+                        <div style="display:none;">
+                            <div class="moreInfo" style="width: 695px; height: 350px;">
+                                <p style="text-align:center;background-color:#14c194;color:white;margin: 0;padding-bottom: 3px">جزئیات وعده</p>
+                                <div style="padding:15px;">
+                                    <p>وعده: <span style="color:brown;">ناهار</span></p>
+                                    <p>برنامه غذایی: <span style="color:brown;">برنامه غذایی اصلی</span></p>
+
+
+                                    <p>نحوه محسابه قیمت: <span style="color:brown;">برحسب قیمت غذا(آزاد)</span></p>
+                                    <p>حداکثرتعداد بسته غذایی: <span style="color:brown;">1</span> عدد</p>
+                                    <p>حداکثرتعداد غذا در هر نوع: <span style="color:brown;">1</span> عدد</p>
+                                    <p>
+                                        آیا انتخاب چند غذا از یک نوع مجاز است؟: <span style="color:brown;">
+ خیر                                        </span>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                            <a href="#openModal" style="display:normal;color:#14c194;text-decoration:none;">
+                                <img src="/Content/resources/images/info1.png" style="width:34px" alt="Info" />
+                            </a>
+                    </div>
+
+                </div>
+
+
+                <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div style="clear:both;"></div>
+                        <label class="reserveFoodType">غذای اصلی</label>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_09ppp00-00dt2025_06_09ppp00-00me1dm1fo665ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---416ae67d-e751-42aa-ba8d-adfceb23adc4" data-countchange="false" data-precount="0" data-count="0"
+                               data-prechecked="False" data-diet-food="dietfood---416ae67d-e751-42aa-ba8d-adfceb23adc4" data-food-options=""
+                                  disabled='disabled'   />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_09ppp00-00dt2025_06_09ppp00-00me1dm1fo665ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;چلو خورش مسما بادمجان با مرغ+میوه &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;چلو خورش مسما بادمجان با مرغ+میوه &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                چلو خورش مسما بادمجان با مرغ+میوه
+                                <span class="reserveFoodType">
+
+
+                                    150,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_09ppp00-00dt2025_06_09ppp00-00me1dm1fo950ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---98de8315-299c-4b75-af5a-ef16fde71eb3" data-countchange="false" data-precount="0" data-count="0"
+                               data-prechecked="False" data-diet-food="dietfood---98de8315-299c-4b75-af5a-ef16fde71eb3" data-food-options=""
+                                  disabled='disabled'   />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_09ppp00-00dt2025_06_09ppp00-00me1dm1fo950ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم)
+                                <span class="reserveFoodType">
+
+
+                                    150,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+ 
+
+                    
+                    
+                </div>
+
+            </div>
+            <div class="dayContainer">
+                <span class="day">سه شنبه</span>
+                <span class="date">1404/03/20</span>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; clear: both;">
+                <div class="reserveFoodMeal" style="float:right;display:flex; flex-direction: column; justify-content: center;">
+                    <span class="TimeMeal">ناهار</span>
+                    <br />
+                    <label class="priceTXT" for="">یارانه:قیمت  برحسب غذا(آزاد)</label>                                        <div>
+                        <div style="display:none;">
+                            <div class="moreInfo" style="width: 695px; height: 350px;">
+                                <p style="text-align:center;background-color:#14c194;color:white;margin: 0;padding-bottom: 3px">جزئیات وعده</p>
+                                <div style="padding:15px;">
+                                    <p>وعده: <span style="color:brown;">ناهار</span></p>
+                                    <p>برنامه غذایی: <span style="color:brown;">برنامه غذایی اصلی</span></p>
+
+
+                                    <p>نحوه محسابه قیمت: <span style="color:brown;">برحسب قیمت غذا(آزاد)</span></p>
+                                    <p>حداکثرتعداد بسته غذایی: <span style="color:brown;">1</span> عدد</p>
+                                    <p>حداکثرتعداد غذا در هر نوع: <span style="color:brown;">1</span> عدد</p>
+                                    <p>
+                                        آیا انتخاب چند غذا از یک نوع مجاز است؟: <span style="color:brown;">
+ خیر                                        </span>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                            <a href="#openModal" style="display:normal;color:#14c194;text-decoration:none;">
+                                <img src="/Content/resources/images/info1.png" style="width:34px" alt="Info" />
+                            </a>
+                    </div>
+
+                </div>
+
+
+                <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div style="clear:both;"></div>
+                        <label class="reserveFoodType">غذای اصلی</label>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_10ppp00-00dt2025_06_10ppp00-00me1dm1fo316ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---d9e3f393-79bd-4242-9da3-5593b80ebf77" data-countchange="false" data-precount="0" data-count="0"
+                               data-prechecked="False" data-diet-food="dietfood---d9e3f393-79bd-4242-9da3-5593b80ebf77" data-food-options=""
+                                  disabled='disabled'   />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_10ppp00-00dt2025_06_10ppp00-00me1dm1fo316ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;عدس پلو با گوشت و كشمش+ماست &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;عدس پلو با گوشت و كشمش+ماست &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                عدس پلو با گوشت و كشمش+ماست
+                                <span class="reserveFoodType">
+
+
+                                    150,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr11897543fp36dd2025_06_10ppp00-00dt2025_06_10ppp00-00me1dm1fo2069ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2025_06_10ppp11-00gft2025_06_10ppp14-45rest36---0860f7b1-8ed1-4ede-99da-743c3b665f46" data-countchange="false" data-precount="1" data-count="0"
+                               data-prechecked="True" data-diet-food="dietfood---0860f7b1-8ed1-4ede-99da-743c3b665f46" data-food-options=""
+                                 checked='checked'     disabled='disabled'   />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr11897543fp36dd2025_06_10ppp00-00dt2025_06_10ppp00-00me1dm1fo2069ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2025_06_10ppp11-00gft2025_06_10ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;hr /&gt;&lt;p style=&quot;color:green;line-height:5px;&quot;&gt;این غذا رزرو شده است&lt;/p&gt;&lt;p&gt;تعداد : &lt;span style=&quot;color:red;line-height:5px;&quot;&gt;1&lt;/span&gt; عدد&lt;/p&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم)
+                                <span class="reserveFoodType">
+
+
+                                    150,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+ 
+
+                    
+                    
+                </div>
+
+            </div>
+            <div class="dayContainer">
+                <span class="day">چهارشنبه</span>
+                <span class="date">1404/03/21</span>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; clear: both;">
+                <div class="reserveFoodMeal" style="float:right;display:flex; flex-direction: column; justify-content: center;">
+                    <span class="TimeMeal">ناهار</span>
+                    <br />
+                    <label class="priceTXT" for="">یارانه:قیمت  برحسب غذا(آزاد)</label>                                        <div>
+                        <div style="display:none;">
+                            <div class="moreInfo" style="width: 695px; height: 350px;">
+                                <p style="text-align:center;background-color:#14c194;color:white;margin: 0;padding-bottom: 3px">جزئیات وعده</p>
+                                <div style="padding:15px;">
+                                    <p>وعده: <span style="color:brown;">ناهار</span></p>
+                                    <p>برنامه غذایی: <span style="color:brown;">برنامه غذایی اصلی</span></p>
+
+
+                                    <p>نحوه محسابه قیمت: <span style="color:brown;">برحسب قیمت غذا(آزاد)</span></p>
+                                    <p>حداکثرتعداد بسته غذایی: <span style="color:brown;">1</span> عدد</p>
+                                    <p>حداکثرتعداد غذا در هر نوع: <span style="color:brown;">1</span> عدد</p>
+                                    <p>
+                                        آیا انتخاب چند غذا از یک نوع مجاز است؟: <span style="color:brown;">
+ خیر                                        </span>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                            <a href="#openModal" style="display:normal;color:#14c194;text-decoration:none;">
+                                <img src="/Content/resources/images/info1.png" style="width:34px" alt="Info" />
+                            </a>
+                    </div>
+
+                </div>
+
+
+                <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div style="clear:both;"></div>
+                        <label class="reserveFoodType">غذای اصلی</label>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_11ppp00-00dt2025_06_11ppp00-00me1dm1fo308ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---51aa3219-4ebc-463e-a389-c88d1acc81b2" data-countchange="false" data-precount="0" data-count="0"
+                               data-prechecked="False" data-diet-food="dietfood---51aa3219-4ebc-463e-a389-c88d1acc81b2" data-food-options=""
+                                 />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_11ppp00-00dt2025_06_11ppp00-00me1dm1fo308ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی
+                                <span class="reserveFoodType">
+
+
+                                    150,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+                <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                    <div class="reserveFoodFoodDiv">
+
+
+                        <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_11ppp00-00dt2025_06_11ppp00-00me1dm1fo309ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---2779614c-54e4-431e-9218-3466718ae238" data-countchange="false" data-precount="0" data-count="0"
+                               data-prechecked="False" data-diet-food="dietfood---2779614c-54e4-431e-9218-3466718ae238" data-food-options=""
+                                 />
+
+                        <div style="float:right;margin-right:2px;">
+
+                            <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_11ppp00-00dt2025_06_11ppp00-00me1dm1fo309ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                   onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک آبگوشت+دوغ+نان سنگک &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک آبگوشت+دوغ+نان سنگک &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک آبگوشت+دوغ+نان سنگک &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                خوراک آبگوشت+دوغ+نان سنگک
+                                <span class="reserveFoodType">
+
+
+                                    150,000
+                                </span>
+
+
+                                <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                </label>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both;"></div>
+
+
+
+                    
+                    <div>
+
+
+
+                    </div>
+                </div>
+ 
+
+                    
+                    
+                </div>
+
+            </div>
+
+        </div>
+        <div class="DesktopView"  style="display:none">
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; clear: both;">
+                <div class="reserveFoodMeal" style="float:right;display:flex; flex-direction: column; justify-content: center;">
+                    <span class="TimeMeal">ناهار</span>
+                    <br />
+                    <label class="priceTXT" for="">یارانه:قیمت  برحسب غذا(آزاد)</label>                                        <div>
+                        <div style="display:none;">
+                            <div class="moreInfo" style="width: 695px; height: 350px;">
+                                <p style="text-align:center;background-color:#14c194;color:white;margin: 0;padding-bottom: 3px">جزئیات وعده</p>
+                                <div style="padding:15px;">
+                                    <p>وعده: <span style="color:brown;">ناهار</span></p>
+                                    <p>برنامه غذایی: <span style="color:brown;">برنامه غذایی اصلی</span></p>
+
+
+                                    <p>نحوه محسابه قیمت: <span style="color:brown;">برحسب قیمت غذا(آزاد)</span></p>
+                                    <p>حداکثرتعداد بسته غذایی: <span style="color:brown;">1</span> عدد</p>
+                                    <p>حداکثرتعداد غذا در هر نوع: <span style="color:brown;">1</span> عدد</p>
+                                    <p>
+                                        آیا انتخاب چند غذا از یک نوع مجاز است؟: <span style="color:brown;">
+ خیر                                        </span>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                            <a href="#openModal" style="display:normal;color:#14c194;text-decoration:none;">
+                                <img src="/Content/resources/images/info1.png" style="width:34px" alt="Info" />
+                            </a>
+                    </div>
+
+                </div>
+                    <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div id="DateDiv">شنبه-1404/03/17</div>
+                            <div style="clear:both;"></div>
+                            <label class="reserveFoodType">غذای اصلی</label>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_07ppp00-00dt2025_06_07ppp00-00me1dm1fo481ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---1c85cdb9-b001-49a4-ac7a-393727da21e8" data-countchange="false" data-precount="0" data-count="0" data-prechecked="False"
+                                   data-food-options="" data-diet-food="dietfood---1c85cdb9-b001-49a4-ac7a-393727da21e8"
+                                      disabled='disabled'   />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_07ppp00-00dt2025_06_07ppp00-00me1dm1fo481ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;سبزی پلو با تن ماهی+زیتون (40 گرم)+خرما &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;سبزی پلو با تن ماهی+زیتون (40 گرم)+خرما &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;سبزی پلو با تن ماهی+زیتون (40 گرم)+خرما &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    سبزی پلو با تن ماهی+زیتون (40 گرم)+خرما
+                                    <span class="reserveFoodType">
+
+
+                                        150,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_07ppp00-00dt2025_06_07ppp00-00me1dm1fo941ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---b3bf20ab-2eb4-469b-9f93-42550b9dc3fc" data-countchange="false" data-precount="0" data-count="0" data-prechecked="False"
+                                   data-food-options="" data-diet-food="dietfood---b3bf20ab-2eb4-469b-9f93-42550b9dc3fc"
+                                      disabled='disabled'   />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_07ppp00-00dt2025_06_07ppp00-00me1dm1fo941ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک قارچ و گوشت+زیتون (40 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک قارچ و گوشت+زیتون (40 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    خوراک قارچ و گوشت+زیتون (40 گرم)
+                                    <span class="reserveFoodType">
+
+
+                                        150,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+ 
+
+                        
+                        
+                    </div>
+                    <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div id="DateDiv">یکشنبه-1404/03/18</div>
+                            <div style="clear:both;"></div>
+                            <label class="reserveFoodType">غذای اصلی</label>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_08ppp00-00dt2025_06_08ppp00-00me1dm1fo508ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---328316bf-9fae-4375-bbb7-518f500b0d7a" data-countchange="false" data-precount="0" data-count="0" data-prechecked="False"
+                                   data-food-options="" data-diet-food="dietfood---328316bf-9fae-4375-bbb7-518f500b0d7a"
+                                      disabled='disabled'   />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_08ppp00-00dt2025_06_08ppp00-00me1dm1fo508ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;زرشك پلوبامرغ+سوپ &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;زرشك پلوبامرغ+سوپ &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    زرشك پلوبامرغ+سوپ
+                                    <span class="reserveFoodType">
+
+
+                                        150,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_08ppp00-00dt2025_06_08ppp00-00me1dm1fo509ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---f4d55526-9dc3-4ce3-ad49-b2738967d1e2" data-countchange="false" data-precount="0" data-count="0" data-prechecked="False"
+                                   data-food-options="" data-diet-food="dietfood---f4d55526-9dc3-4ce3-ad49-b2738967d1e2"
+                                      disabled='disabled'   />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_08ppp00-00dt2025_06_08ppp00-00me1dm1fo509ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک سالاد ماكاروني+سوپ &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک سالاد ماكاروني+سوپ &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    خوراک سالاد ماكاروني+سوپ
+                                    <span class="reserveFoodType">
+
+
+                                        120,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+ 
+
+                        
+                        
+                    </div>
+                    <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div id="DateDiv">دوشنبه-1404/03/19</div>
+                            <div style="clear:both;"></div>
+                            <label class="reserveFoodType">غذای اصلی</label>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_09ppp00-00dt2025_06_09ppp00-00me1dm1fo665ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---ed37a8f9-5952-4d10-b1c0-796540e4ba42" data-countchange="false" data-precount="0" data-count="0" data-prechecked="False"
+                                   data-food-options="" data-diet-food="dietfood---ed37a8f9-5952-4d10-b1c0-796540e4ba42"
+                                      disabled='disabled'   />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_09ppp00-00dt2025_06_09ppp00-00me1dm1fo665ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;چلو خورش مسما بادمجان با مرغ+میوه &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;چلو خورش مسما بادمجان با مرغ+میوه &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    چلو خورش مسما بادمجان با مرغ+میوه
+                                    <span class="reserveFoodType">
+
+
+                                        150,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_09ppp00-00dt2025_06_09ppp00-00me1dm1fo950ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---a02b51dd-a8bf-4b04-b5d1-9bbcbb907f08" data-countchange="false" data-precount="0" data-count="0" data-prechecked="False"
+                                   data-food-options="" data-diet-food="dietfood---a02b51dd-a8bf-4b04-b5d1-9bbcbb907f08"
+                                      disabled='disabled'   />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_09ppp00-00dt2025_06_09ppp00-00me1dm1fo950ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    خوراک ناگت مرغ+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+میوه+خیار شور (50 گرم)
+                                    <span class="reserveFoodType">
+
+
+                                        150,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+ 
+
+                        
+                        
+                    </div>
+                    <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div id="DateDiv">سه شنبه-1404/03/20</div>
+                            <div style="clear:both;"></div>
+                            <label class="reserveFoodType">غذای اصلی</label>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_10ppp00-00dt2025_06_10ppp00-00me1dm1fo316ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---f18222f9-e927-4cb8-862d-aa56acf560e1" data-countchange="false" data-precount="0" data-count="0" data-prechecked="False"
+                                   data-food-options="" data-diet-food="dietfood---f18222f9-e927-4cb8-862d-aa56acf560e1"
+                                      disabled='disabled'   />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_10ppp00-00dt2025_06_10ppp00-00me1dm1fo316ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;عدس پلو با گوشت و كشمش+ماست &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;عدس پلو با گوشت و كشمش+ماست &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    عدس پلو با گوشت و كشمش+ماست
+                                    <span class="reserveFoodType">
+
+
+                                        150,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr11897543fp36dd2025_06_10ppp00-00dt2025_06_10ppp00-00me1dm1fo2069ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2025_06_10ppp11-00gft2025_06_10ppp14-45rest36---c7a8db92-ce4e-4d74-a386-4d57012631ad" data-countchange="false" data-precount="1" data-count="0" data-prechecked="True"
+                                   data-food-options="" data-diet-food="dietfood---c7a8db92-ce4e-4d74-a386-4d57012631ad"
+                                     checked='checked'     disabled='disabled'   />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr11897543fp36dd2025_06_10ppp00-00dt2025_06_10ppp00-00me1dm1fo2069ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2025_06_10ppp11-00gft2025_06_10ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم) &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;hr /&gt;&lt;p style=&quot;color:green;line-height:5px;&quot;&gt;این غذا رزرو شده است&lt;/p&gt;&lt;p&gt;تعداد : &lt;span style=&quot;color:red;line-height:5px;&quot;&gt;1&lt;/span&gt; عدد&lt;/p&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    خوراک کراکت مرغ و پنیر+سیب زمینی سرخ کرده+سس کچاپ(تکنفره)+گوجه فرنگی حلقه ای (60 گرم)+ماست+خیار شور (50 گرم)
+                                    <span class="reserveFoodType">
+
+
+                                        150,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+ 
+
+                        
+                        
+                    </div>
+                    <div id="MealDiv" class="WeekMeal" style="background: #f7f7f7;  float: right; display: flex; flex-direction: column;">
+                        <div id="DateDiv">چهارشنبه-1404/03/21</div>
+                            <div style="clear:both;"></div>
+                            <label class="reserveFoodType">غذای اصلی</label>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_11ppp00-00dt2025_06_11ppp00-00me1dm1fo308ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---ee62db18-105e-4668-88b3-80b99388ca2d" data-countchange="false" data-precount="0" data-count="0" data-prechecked="False"
+                                   data-food-options="" data-diet-food="dietfood---ee62db18-105e-4668-88b3-80b99388ca2d"
+                                     />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_11ppp00-00dt2025_06_11ppp00-00me1dm1fo308ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    چلوكباب كوبیده+دوغ+کره (تکنفره)+گوجه فرنگی کبابی
+                                    <span class="reserveFoodType">
+
+
+                                        150,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="foodMainCnt" style="border-radius: 5px; border-style: solid; border-color: lightgray; border-width: thin; margin: 2px; padding: 2px;">
+                        <div class="reserveFoodFoodDiv">
+
+
+
+                            <input type="checkbox" onchange="chechBoxChanged(this)" changed="false" class="reserveFoodCheckBox" id="rr0fp36dd2025_06_11ppp00-00dt2025_06_11ppp00-00me1dm1fo309ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36---67ddb5fe-976b-473e-b5db-181dacd6c86b" data-countchange="false" data-precount="0" data-count="0" data-prechecked="False"
+                                   data-food-options="" data-diet-food="dietfood---67ddb5fe-976b-473e-b5db-181dacd6c86b"
+                                     />
+
+                            <div style="float:right;margin-right:2px;">
+
+                                <label class="reserveFoodCheckBox" style="color:green" for="rr0fp36dd2025_06_11ppp00-00dt2025_06_11ppp00-00me1dm1fo309ftf2022_05_25ppp11-00ftt2022_05_25ppp14-45gff2022_05_25ppp11-00gft2022_05_25ppp14-45rest36"
+                                       onmouseover="TipInReserve('&lt;div style=&quot;color:#5b5b5b;font-family:mj_baseet;width:auto!important;padding-right:4px;&quot;&gt;&lt;p&gt;: این بسته غذایی شامل&lt;/p&gt;&lt;ul style=&quot;direction:rtl;list-style-type:circle;list-style-color:red;&quot;&gt;&lt;li&gt;خوراک آبگوشت+دوغ+نان سنگک &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک آبگوشت+دوغ+نان سنگک &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt; &lt;li&gt;خوراک آبگوشت+دوغ+نان سنگک &lt;span style=&quot;color:red;line-height:5px&quot;&gt;1&lt;/span&gt; عدد &lt;/li&gt;&lt;/ul&gt;&lt;hr /&gt;&lt;/div&gt;',BGCOLOR, '#FFFFFF',FONTCOLOR,'#555555',OPACITY,100,BORDERCOLOR,'#F8AEA6',FONTSIZE,'9pt',FONTFACE,'IRANSans(FaNum) Medium,YekanWeb,YekanNumbers')" onmouseout="UnTip()">
+                                    خوراک آبگوشت+دوغ+نان سنگک
+                                    <span class="reserveFoodType">
+
+
+                                        150,000
+                                    </span>
+
+
+                                    <label class="countLabel" style="color: red;font-size:11px;margin-right:2px;font-family: 'YekanWeb','YekanNumbers'; display:none;">
+                                    </label>
+                                </label>
+
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both;"></div>
+
+
+
+
+                        <div>
+
+
+
+                        </div>
+                    </div>
+ 
+
+                        
+                        
+                    </div>
+            </div>
+        </div>
+        </div>
+        <br />
+
+        <script>
+            $(".selectDiv option:checked").addClass("selectedOption")
+
+            if (window.innerWidth < 1024) {
+                $(".PhoneView").css('display', 'block');
+            } else {
+                $(".DesktopView").css('display', 'block');
+            }
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth < 1024) {
+                    $(".PhoneView").css('display', 'block');
+                    $(".DesktopView").css('display', 'none');
+                } else {
+                    $(".PhoneView").css('display', 'none');
+                    $(".DesktopView").css('display', 'block');
+                }
+            });
+
+            var message = new Array();
+
+            function commentClick(elem) {
+                                        if ($(elem).attr("class") == "likeLinkEn")
+                                            return;
+                                        var id = $(elem).attr("id");
+                                        $.ajax({
+                                            type: "post",
+                                            url: "/Reserves/ReserveComment",
+                                            data: { 'DataId': id },
+                                            error: function (xhr) {
+                                                $("#mainModal").removeClass("modalDialogShow")
+                                                toastr.warning('دسترسی ناموفق', 'خطا');
+                                            },
+                                            success: function (data) {
+                                                $("#mainModal").removeClass("modalDialogShow")
+                                                if (data.Success) {
+                                                    toastr.success(data.Message);
+                                                    //note:
+                                                    //CSS.escape() does not work in IE and so in the kiosk reserve page
+                                                    //replaceAll does not work in IE and so in the kiosk reserve page
+                                                    //So, we have used replace(/:/g, "\\:"))
+													var likeId = '3' + id.substring(1).replace(/:/g, "\\:");
+													var dislikeId = '2' + id.substring(1).replace(/:/g, "\\:");
+													var pasId = '1' + id.substring(1).replace(/:/g, "\\:");
+                                                    var fc = id.charAt(0);
+                                                    $('#' + likeId).attr('class', (fc == '3' ? 'likeLinkEn' : 'likeLinkDis'))
+                                                    $('#' + likeId + " .dis").css('display', (fc != '3' ? 'block' : 'none'));
+                                                    $('#' + likeId + " .en").css('display', (fc == '3' ? 'block' : 'none'));
+
+                                                    $('#' + dislikeId).attr('class', (fc == '2' ? 'likeLinkEn' : 'likeLinkDis'))
+                                                    $('#' + dislikeId + " .dis").css('display', (fc != '2' ? 'block' : 'none'));
+                                                    $('#' + dislikeId + " .en").css('display', (fc == '2' ? 'block' : 'none'));
+
+                                                    $('#' + pasId).attr('class', (fc == '1' ? 'likeLinkEn' : 'likeLinkDis'))
+                                                    $('#' + pasId + " .dis").css('display', (fc != '1' ? 'block' : 'none'));
+                                                    $('#' + pasId + " .en").css('display', (fc == '1' ? 'block' : 'none'));
+                                                }
+                                                else {
+                                                    toastr.warning(data.Message);
+                                                }
+                                            }
+                                        }
+                                        );
+                                    }
+
+        </script>
+
+    </div>
+    <div class="clearSty"></div>
+</div>
