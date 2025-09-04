@@ -46,11 +46,14 @@ load_dotenv()
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 MYSQL_CONFIG = {
-    "host": os.getenv("MYSQLHOST"),
-    "port": int(os.getenv("MYSQLPORT", "3306")),
-    "user": os.getenv("MYSQLUSER"),
-    "password": os.getenv("MYSQLPASSWORD"),
-    "database": os.getenv("MYSQLDATABASE"),
+    "host": os.getenv("DB_HOST"),
+    # "host": "db",
+    "port": int(os.getenv("DB_PORT", "3306")),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    # "password": "admin123",
+    "database": os.getenv("DB_NAME"),
+    # "database": "GoshneYad",
     "pool_size": 5,
     "pool_name": "mypool",
     "connect_timeout": 30
@@ -450,17 +453,17 @@ async def process_food_query_internal(update: Update, context: ContextTypes.DEFA
 
         try:
             if university == "خوارزمی":
-                with open("kharazmi_menu.html", "r", encoding="utf-8") as f:
+                with open("./layouts/kharazmi_menu.html", "r", encoding="utf-8") as f:
                     html_content_single = f.read()
             elif university == "تهران":
-                with open("tehran_menu_lunch.html", "r", encoding="utf-8") as f:
+                with open("./layouts/tehran_menu_lunch.html", "r", encoding="utf-8") as f:
                     html_content_lunch = f.read()
-                with open("tehran_menu_dinner.html", "r", encoding="utf-8") as f:
+                with open("./layouts/tehran_menu_dinner.html", "r", encoding="utf-8") as f:
                     html_content_dinner = f.read()
-            elif university == "خوارزمی تهران":
-                with open("kharazmi_tehran_lunch.html", "r", encoding="utf-8") as f:
+            elif university == "خوارزمی تهران":  
+                with open("./layouts/kharazmi_tehran_lunch.html", "r", encoding="utf-8") as f:
                     html_content_lunch = f.read()
-                with open("kharazmi_tehran_dinner.html", "r", encoding="utf-8") as f:
+                with open("./layouts/kharazmi_tehran_dinner.html", "r", encoding="utf-8") as f:
                     html_content_dinner = f.read()
             else:
                 logging.warning(f"University '{university}' has no defined menu loading logic.")
