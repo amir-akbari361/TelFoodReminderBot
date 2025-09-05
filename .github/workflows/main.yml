@@ -35,9 +35,9 @@ jobs:
         env:
           UNIVERSITY_USERNAME: ${{ secrets.UNIVERSITY_USERNAME }}
           UNIVERSITY_PASSWORD: ${{ secrets.UNIVERSITY_PASSWORD }}
-          run: |
-              ls -R   
-              python scraper.py
+        run: |
+            ls -R   
+            python scraper.py
 
       # Step 6: Commits and pushes the updated menu files to your repository
       - name: Commit and push if there are changes
