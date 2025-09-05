@@ -14,26 +14,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Sets up Python environment
+      # Step 2: List files for debugging
+      - name: List files in the repository
+        run: ls -R
+
+      # Step 3: Sets up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      # Step 3: Installs required Python libraries
+      # Step 4: Installs required Python libraries
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
 
-      # Step 4: Runs the scraper script to download the menu files
+      # Step 5: Runs the scraper script to download the menu files
       - name: Run scraper to update menu files
         env:
           UNIVERSITY_USERNAME: ${{ secrets.UNIVERSITY_USERNAME }}
           UNIVERSITY_PASSWORD: ${{ secrets.UNIVERSITY_PASSWORD }}
         run: python scraper.py
 
-      # Step 5: Commits and pushes the updated menu files to your repository
+      # Step 6: Commits and pushes the updated menu files to your repository
       - name: Commit and push if there are changes
         run: |
           git config --global user.name "GitHub Actions Bot"
